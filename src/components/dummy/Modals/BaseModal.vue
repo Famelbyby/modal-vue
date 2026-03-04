@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ModalEmits, ModalProps } from '@/utils/types/modal';
 import { computed, useTemplateRef } from 'vue';
-import { useModal } from '@/composables/useModal';
+import { AddListeners } from '@/utils/shared/AddListeners';
 import { MODAL_EVENT_HANDLERS } from '@/utils/consts/modal';
 import ModalHeader from './ModalHeader.vue';
 import Button from '../Button.vue';
@@ -18,7 +18,7 @@ const modalEventHandlers = computed(() =>
     MODAL_EVENT_HANDLERS(modalRef, closeModal),
 );
 
-useModal(modalEventHandlers.value);
+AddListeners(modalEventHandlers.value);
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 import type { EventHandlerItem } from '@/utils/types/modal';
 import { onBeforeUnmount, onMounted } from 'vue';
 
-export function useModal(eventHandlers: EventHandlerItem[]) {
+export function AddListeners(eventHandlers: EventHandlerItem[]) {
     onMounted(() => {
         eventHandlers.forEach((eventHandler) =>
             document.addEventListener(
