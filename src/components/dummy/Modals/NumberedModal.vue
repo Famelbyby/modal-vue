@@ -35,7 +35,7 @@ const numberedModalButtons = [
         @close-modal="emit('closeModal')"
     >
         <div class="numbered-info">
-            А вот это уже новое нумерованное окно....
+            Можете создать ещё одно такое окно, попробуйте
         </div>
     </BaseModal>
 </template>

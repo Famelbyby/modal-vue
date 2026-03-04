@@ -39,7 +39,7 @@ $agreeButtonBackground: green;
     }
 }
 
-.close-button {
+.cancel-button {
     background-color: $closeButtonBackground;
     color: $baseButtonColor;
 }

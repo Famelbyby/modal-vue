@@ -15,7 +15,7 @@ export const CREATE_MODAL_BUTTONS = (
                         {
                             title: 'Закрыть',
                             action: closeModal,
-                            className: 'close-button',
+                            className: 'cancel-button',
                         },
                     ],
                     modal: 'casual-modal',
@@ -25,8 +25,14 @@ export const CREATE_MODAL_BUTTONS = (
             title: 'Создать прокручиваемое модальное окно',
             action: () =>
                 showModal({
-                    title: 'А я уже прокручиваемое модальное окно!!!',
-                    buttons: [],
+                    title: 'А я уже прокручиваемое модальное окно',
+                    buttons: [
+                        {
+                            title: 'Принято',
+                            action: closeModal,
+                            className: 'agree-button',
+                        },
+                    ],
                     modal: 'scrolled-modal',
                 }),
         },
@@ -35,7 +41,13 @@ export const CREATE_MODAL_BUTTONS = (
             action: () =>
                 showModal({
                     title: 'Зато я самое большое модальное окно',
-                    buttons: [],
+                    buttons: [
+                        {
+                            title: 'Красота!',
+                            action: closeModal,
+                            className: 'agree-button',
+                        },
+                    ],
                     modal: 'huge-modal',
                 }),
         },

@@ -38,3 +38,8 @@ export type ModalHeaderProps = {
 export type ModalHeaderEmits = {
     (e: 'closeModal'): void;
 };
+
+export type HugeModalInfoImage = {
+    src: string;
+    alt: string;
+};

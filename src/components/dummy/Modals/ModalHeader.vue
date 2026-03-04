@@ -12,9 +12,23 @@ const emit = defineEmits<ModalHeaderEmits>();
             {{ title }}
         </div>
         <Button
-            class-name="modal-header__close"
+            class-name="modal-header__close-button"
             title="X"
             @click-event="emit('closeModal')"
         />
     </div>
 </template>
+
+<style lang="scss" scoped>
+.modal {
+    &-header {
+        position: relative;
+
+        &__close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    }
+}
+</style>
