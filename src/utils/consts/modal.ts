@@ -27,3 +27,5 @@ export const MODAL_TYPES = [
     'numbered-modal',
     'scrolled-modal',
 ] as const;
+
+export const SCROLLED_MODAL_REFS = ['ni', 'li'] as const;

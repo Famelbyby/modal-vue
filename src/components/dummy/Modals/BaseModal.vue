@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { ModalProps } from '@/utils/types/modal';
-import { computed, useTemplateRef } from 'vue';
+import { computed, onUpdated, useTemplateRef } from 'vue';
 import { AddListeners } from '@/utils/shared/AddListeners';
 import { MODAL_EVENT_HANDLERS } from '@/utils/modal/EventHandlers';
 import ModalHeader from './ModalHeader.vue';
 import Button from '../Button.vue';
 import { useModalManager } from '@/composables/useModalManager';
 
-const { title, buttons, classname } = defineProps<ModalProps>();
+const { title, buttons, classname, focus } = defineProps<ModalProps>();
 const { closeModal } = useModalManager();
 const modalRef = useTemplateRef('mr');
 
@@ -28,6 +28,12 @@ const modalEventHandlers = computed(() =>
 );
 
 AddListeners(modalEventHandlers.value);
+
+onUpdated(() => {
+    if (focus) {
+        focus.focus();
+    }
+});
 </script>
 
 <template>
@@ -97,10 +103,11 @@ $animationDuration: 0.3s;
     &-body {
         display: flex;
         flex-grow: 1;
-        justify-content: center;
-        align-items: start;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
         min-height: 0;
-        padding: 30px;
+        padding: 20px 30px;
         overflow-y: auto;
     }
 

@@ -1,12 +1,44 @@
 <script setup lang="ts">
 import type { ModalProps } from '@/utils/types/modal';
 import BaseModal from './BaseModal.vue';
+import { nextTick, onMounted, ref, useTemplateRef, type ShallowRef } from 'vue';
+import { SCROLLED_MODAL_REFS } from '@/utils/consts/modal';
 
 const props = defineProps<ModalProps>();
+const chosenRef = ref<HTMLElement | null>(null);
+const refs: Readonly<ShallowRef<HTMLElement | null>>[] =
+    SCROLLED_MODAL_REFS.map((refName) => useTemplateRef(refName));
+
+onMounted(async () => {
+    await nextTick();
+
+    //пример как можно задать defaultFocusable
+    chosenRef.value = refs[1]?.value || null;
+
+    refs.forEach((elemRef) => {
+        if (elemRef.value) {
+            elemRef.value.addEventListener('focus', () => {
+                chosenRef.value = elemRef.value;
+            });
+        }
+    });
+});
 </script>
 
 <template>
-    <BaseModal v-bind="props">
+    <BaseModal v-bind="props" :focus="chosenRef">
+        <input
+            ref="ni"
+            class="scrolled__input"
+            type="text"
+            placeholder="Введите ваше имя"
+        />
+        <input
+            ref="li"
+            class="scrolled__input"
+            type="text"
+            placeholder="Введите вашу фамилию"
+        />
         <div class="scrolled-info">
             Достаточно много текста... Большой пожар в Лондоне (англ. Great Fire
             of London) — пожар, охвативший центральные районы Лондона с
@@ -36,3 +68,21 @@ const props = defineProps<ModalProps>();
         </div>
     </BaseModal>
 </template>
+
+<style lang="scss" scoped>
+    .scrolled {
+        &__input {
+            display: flex;
+            width: 80%;
+            box-sizing: border-box;
+            padding: 7px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 1px solid gray;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+</style>

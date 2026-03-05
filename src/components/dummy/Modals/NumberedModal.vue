@@ -3,7 +3,7 @@ import type { ModalProps, NumberedModalEmits } from '@/utils/types/modal';
 import BaseModal from './BaseModal.vue';
 import { GetRandomModalKey } from '@/utils/modal/GetRandomModalKey';
 
-const { count, classname } = defineProps<ModalProps>();
+const { count, classname, focus } = defineProps<ModalProps>();
 const emit = defineEmits<NumberedModalEmits>();
 
 const numberedModalButtons = [
@@ -33,6 +33,7 @@ const numberedModalButtons = [
         :title="`Окно №${count || 1}`"
         :buttons="numberedModalButtons"
         :classname
+        :focus
     >
         <div class="numbered-info">
             Можете создать ещё одно окно, попробуйте

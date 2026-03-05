@@ -6,6 +6,7 @@ export type ModalProps = {
     classname?: string;
     buttons: IButton[];
     count?: number;
+    focus?: HTMLElement | null;
 };
 
 export type NumberedModalEmits = {
@@ -14,7 +15,7 @@ export type NumberedModalEmits = {
     (e: 'closeModal'): void;
 };
 
-export type ModalKey = keyof typeof MODAL_TYPES;
+export type ModalKey = (typeof MODAL_TYPES)[number];
 
 export type IModal = ModalProps & {
     modal: ModalKey;
