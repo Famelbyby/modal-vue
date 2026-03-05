@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import type { ModalEmits, ModalProps } from '@/utils/types/modal';
+import type { ModalProps } from '@/utils/types/modal';
 import BaseModal from './BaseModal.vue';
 
 const props = defineProps<ModalProps>();
-const emit = defineEmits<ModalEmits>();
 </script>
 
 <template>
-    <BaseModal v-bind="props" @close-modal="emit('closeModal')">
+    <BaseModal v-bind="props">
         <div class="scrolled-info">
             Достаточно много текста... Большой пожар в Лондоне (англ. Great Fire
             of London) — пожар, охвативший центральные районы Лондона с

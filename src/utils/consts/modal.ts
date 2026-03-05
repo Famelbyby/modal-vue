@@ -1,24 +1,6 @@
-import type { ShallowRef } from 'vue';
-import type { EventHandlerItem, HugeModalInfoImage } from '../types/modal';
-import { CatchClick, CatchKeyDown } from '../shared/EventCatchers';
+import type { HugeModalInfoImage, ModalKey } from '../types/modal';
 
 export const PREVENTED_KEYS = ['Escape'];
-
-export const MODAL_EVENT_HANDLERS = (
-    modalRef: Readonly<ShallowRef<HTMLDivElement | null>>,
-    closeModal: () => void,
-) =>
-    <EventHandlerItem[]>[
-        {
-            eventName: 'click',
-            eventHandler: (e) => CatchClick(modalRef, e, [closeModal]),
-        },
-        {
-            eventName: 'keydown',
-            eventHandler: (e) =>
-                CatchKeyDown(e as KeyboardEvent, PREVENTED_KEYS, [closeModal]),
-        },
-    ];
 
 export const HUGE_MODAL_IMAGES: HugeModalInfoImage[] = [
     {
@@ -38,3 +20,10 @@ export const HUGE_MODAL_IMAGES: HugeModalInfoImage[] = [
         alt: 'forest',
     },
 ];
+
+export const MODAL_TYPES = [
+    'casual-modal',
+    'huge-modal',
+    'numbered-modal',
+    'scrolled-modal',
+] as const;

@@ -21,5 +21,5 @@ export function useModalManager() {
         modals.length = 0;
     }
 
-    return { modal, showModal, closeModal, closeAllModals };
+    return { modal, modalsLen, showModal, closeModal, closeAllModals };
 }

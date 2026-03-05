@@ -17,5 +17,6 @@ const activeModal = computed(() =>
         @close-modal="manager.closeModal"
         @close-all-modals="manager.closeAllModals"
         @open-modal="manager.showModal"
+        :key="manager.modalsLen.value"
     />
 </template>

@@ -1,25 +1,19 @@
 <script setup lang="ts">
-import type { ModalEmits, ModalProps } from '@/utils/types/modal';
+import type { ModalProps } from '@/utils/types/modal';
 import BaseModal from './BaseModal.vue';
 import { HUGE_MODAL_IMAGES } from '@/utils/consts/modal';
 
 const props = defineProps<ModalProps>();
-const emit = defineEmits<ModalEmits>();
 </script>
 
 <template>
-    <BaseModal
-        v-bind="props"
-        classname="modal_huge"
-        @close-modal="emit('closeModal')"
-    >
+    <BaseModal v-bind="props" class="modal_huge">
         <div class="huge-info">
             <div class="huge-info__description">Полюбуйтесь природой!</div>
             <img
                 v-for="image in HUGE_MODAL_IMAGES"
                 class="huge-info__img"
-                :src="image.src"
-                :alt="image.alt"
+                v-bind="image"
                 :key="image.src"
             />
         </div>

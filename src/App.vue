@@ -7,6 +7,10 @@ import MainPage from './pages/MainPage.vue';
 </template>
 
 <style lang="scss" module>
+html {
+    background-color: antiquewhite;
+}
+
 body {
     margin: 0;
 }

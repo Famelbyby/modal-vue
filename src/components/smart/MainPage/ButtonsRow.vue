@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CREATE_MODAL_BUTTONS } from '@/utils/consts/create-modal.buttons';
+import { CREATE_MODAL_BUTTONS } from '@/utils/main-page/ButtonsRow';
 import { useModalManager } from '@/composables/useModalManager';
 import Button from '@/components/dummy/Button.vue';
 

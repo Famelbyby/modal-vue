@@ -1,3 +1,4 @@
+import type { MODAL_TYPES } from '../consts/modal';
 import type { IButton } from './button';
 
 export type ModalProps = {
@@ -7,20 +8,13 @@ export type ModalProps = {
     count?: number;
 };
 
-export type ModalEmits = {
+export type NumberedModalEmits = {
+    (e: 'openModal', newModal: IModal): void;
+    (e: 'closeAllModals'): void;
     (e: 'closeModal'): void;
 };
 
-export type NumberedModalEmits = ModalEmits & {
-    (e: 'openModal', newModal: IModal): void;
-    (e: 'closeAllModals'): void;
-};
-
-export type ModalKey =
-    | 'casual-modal'
-    | 'scrolled-modal'
-    | 'huge-modal'
-    | 'numbered-modal';
+export type ModalKey = (typeof MODAL_TYPES)[number];
 
 export type IModal = ModalProps & {
     modal: ModalKey;

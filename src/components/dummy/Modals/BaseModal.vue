@@ -1,21 +1,34 @@
 <script setup lang="ts">
-import type { ModalEmits, ModalProps } from '@/utils/types/modal';
+import type { ModalProps } from '@/utils/types/modal';
 import { computed, useTemplateRef } from 'vue';
 import { AddListeners } from '@/utils/shared/AddListeners';
-import { MODAL_EVENT_HANDLERS } from '@/utils/consts/modal';
+import { MODAL_EVENT_HANDLERS } from '@/utils/modal/EventHandlers';
 import ModalHeader from './ModalHeader.vue';
 import Button from '../Button.vue';
+import { useModalManager } from '@/composables/useModalManager';
 
 const { title, buttons, classname } = defineProps<ModalProps>();
-const emit = defineEmits<ModalEmits>();
+const { closeModal } = useModalManager();
 const modalRef = useTemplateRef('mr');
 
-function closeModal() {
-    emit('closeModal');
+defineOptions({
+    inheritAttrs: false,
+});
+
+function beforeCloseModal() {
+    const modal = modalRef.value;
+
+    if (modal !== null) {
+        modal.classList.add('modal_before-close');
+    }
+
+    setTimeout(() => {
+        closeModal();
+    }, 500);
 }
 
 const modalEventHandlers = computed(() =>
-    MODAL_EVENT_HANDLERS(modalRef, closeModal),
+    MODAL_EVENT_HANDLERS(modalRef, beforeCloseModal),
 );
 
 AddListeners(modalEventHandlers.value);
@@ -23,8 +36,8 @@ AddListeners(modalEventHandlers.value);
 
 <template>
     <div class="modal-wrapper">
-        <div ref="mr" class="modal" :class="classname">
-            <ModalHeader :title @close-modal="closeModal" />
+        <div ref="mr" class="modal" :class="classname" v-bind="$attrs">
+            <ModalHeader :title @close-modal="beforeCloseModal" />
             <div class="modal-body">
                 <slot>Modal body</slot>
             </div>
@@ -43,6 +56,7 @@ AddListeners(modalEventHandlers.value);
 <style lang="scss" scoped>
 $wrapperBackground: rgba(219, 219, 219, 0.66);
 $modalBackground: white;
+$animationDuration: 0.3s;
 
 .modal {
     display: flex;
@@ -51,6 +65,8 @@ $modalBackground: white;
     background: $modalBackground;
     height: 60%;
     border-radius: 10px;
+
+    animation: modal-appearing $animationDuration ease-in forwards;
 
     &-wrapper {
         position: fixed;
@@ -62,7 +78,7 @@ $modalBackground: white;
         justify-content: center;
         align-items: start;
         padding-top: 20px;
-        overflow-y: scroll;
+        overflow-y: auto;
         padding-bottom: 20px;
         box-sizing: border-box;
 
@@ -89,7 +105,7 @@ $modalBackground: white;
         align-items: start;
         min-height: 0;
         padding: 30px;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     &-footer {
@@ -101,6 +117,23 @@ $modalBackground: white;
 
     &_huge {
         height: 1500px;
+    }
+
+    &_before-close {
+        animation: modal-disappearing $animationDuration ease-in;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes modal-appearing {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes modal-disappearing {
+    to {
+        opacity: 0;
     }
 }
 </style>

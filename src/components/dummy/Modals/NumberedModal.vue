@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ModalProps, NumberedModalEmits } from '@/utils/types/modal';
 import BaseModal from './BaseModal.vue';
+import { GetRandomModalKey } from '@/utils/modal/GetRandomModalKey';
 
 const { count, classname } = defineProps<ModalProps>();
 const emit = defineEmits<NumberedModalEmits>();
@@ -13,7 +14,7 @@ const numberedModalButtons = [
                 title: ``,
                 buttons: [],
                 count: (count || 1) + 1,
-                modal: 'numbered-modal',
+                modal: GetRandomModalKey(),
             }),
     },
     {
@@ -32,7 +33,6 @@ const numberedModalButtons = [
         :title="`Окно №${count || 1}`"
         :buttons="numberedModalButtons"
         :classname
-        @close-modal="emit('closeModal')"
     >
         <div class="numbered-info">
             Можете создать ещё одно такое окно, попробуйте
