@@ -1,4 +1,4 @@
-import type { HugeModalInfoImage, ModalKey } from '../types/modal';
+import type { HugeModalInfoImage } from '../types/modal';
 
 export const PREVENTED_KEYS = ['Escape'];
 
