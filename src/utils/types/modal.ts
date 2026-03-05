@@ -14,7 +14,7 @@ export type NumberedModalEmits = {
     (e: 'closeModal'): void;
 };
 
-export type ModalKey = (typeof MODAL_TYPES)[number];
+export type ModalKey = keyof typeof MODAL_TYPES;
 
 export type IModal = ModalProps & {
     modal: ModalKey;

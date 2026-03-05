@@ -7,7 +7,7 @@ const props = defineProps<ModalProps>();
 </script>
 
 <template>
-    <BaseModal v-bind="props" class="modal_huge">
+    <BaseModal v-bind="props" classname="modal_huge">
         <div class="huge-info">
             <div class="huge-info__description">Полюбуйтесь природой!</div>
             <img

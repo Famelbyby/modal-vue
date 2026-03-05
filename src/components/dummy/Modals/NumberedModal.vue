@@ -35,7 +35,7 @@ const numberedModalButtons = [
         :classname
     >
         <div class="numbered-info">
-            Можете создать ещё одно такое окно, попробуйте
+            Можете создать ещё одно окно, попробуйте
         </div>
     </BaseModal>
 </template>

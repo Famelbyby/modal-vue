@@ -11,10 +11,6 @@ const { title, buttons, classname } = defineProps<ModalProps>();
 const { closeModal } = useModalManager();
 const modalRef = useTemplateRef('mr');
 
-defineOptions({
-    inheritAttrs: false,
-});
-
 function beforeCloseModal() {
     const modal = modalRef.value;
 
@@ -36,7 +32,7 @@ AddListeners(modalEventHandlers.value);
 
 <template>
     <div class="modal-wrapper">
-        <div ref="mr" class="modal" :class="classname" v-bind="$attrs">
+        <div ref="mr" class="modal" :class="classname">
             <ModalHeader :title @close-modal="beforeCloseModal" />
             <div class="modal-body">
                 <slot>Modal body</slot>
